@@ -13,6 +13,7 @@ _cache/*
 database.db
 *.db
 *.db-journal
+migrations
 
 # testing
 .coverage
