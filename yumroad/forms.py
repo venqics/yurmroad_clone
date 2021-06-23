@@ -33,6 +33,7 @@ class LoginForm(FlaskForm):
         return True
 
 class SignupForm(FlaskForm):
+    store_name = StringField('Store Name', validators=[validators.required(), validators.length(min=4)])
     email = StringField('Email', validators=[validators.email(), validators.required()])
     password = PasswordField('Password', validators=[validators.required(), validators.length(min=4),
                                                      validators.EqualTo('confirm', message='Passwords must match')])
@@ -50,4 +51,6 @@ class SignupForm(FlaskForm):
             self.email.errors.append('That email already has an account')
             return False
         return True
+
+        # TODO: Maybe you'll want a validation to prevent the same store name from being used twice
 
