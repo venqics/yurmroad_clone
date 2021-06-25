@@ -61,7 +61,7 @@ def test_get_register(client, init_database):
     assert 'Store Name' in str(response.data)
     assert 'Password' in str(response.data)
 
-def test_register(client, init_database):
+def test_register(client, init_database, mail_outbox):
     response = client.post('/register', data=VALID_REGISTER_PARAMS, follow_redirects=True)
     assert response.status_code == 200
 
@@ -72,6 +72,8 @@ def test_register(client, init_database):
     assert b'Registered succesfully.' in response.data
     assert EXAMPLE_EMAIL in str(response.data)
     assert b'Add Product' in response.data
+    assert len(mail_outbox) == 1
+    assert mail_outbox[0].subject == "Welcome to yumroad Test Store"
 
 def test_register_with_existing_user(client, init_database):
     user = create_user()
@@ -84,13 +86,14 @@ def test_register_with_existing_user(client, init_database):
     assert b'Registered succesfully.' not in response.data
     assert b'You are already logged in' not in response.data
 
-def test_register_with_invalid_store_name(client, init_database):
+def test_register_with_invalid_store_name(client, init_database, mail_outbox):
     user = create_user()
     response = client.post('/register', data=SHORT_STORE_NAME, follow_redirects=True)
     assert response.status_code == 200
 
     assert b'must be at least 4 characters long' in response.data
     assert b'Sign up' in response.data
+    assert len(mail_outbox) == 0
 
     assert b'Registered succesfully.' not in response.data
     assert b'You are already logged in' not in response.data
