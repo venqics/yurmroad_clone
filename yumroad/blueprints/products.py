@@ -6,7 +6,7 @@ from yumroad.forms import ProductForm
 
 product_bp = Blueprint('product', __name__)
 
-@product_bp.route('/')
+@product_bp.route('/product')
 def index():
     products = Product.query.all()
     return render_template('products/index.html', products=products)

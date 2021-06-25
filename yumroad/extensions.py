@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from yumroad.payments import Checkout
+from flask_assets import Environment
 
 from sqlalchemy import MetaData
 
@@ -21,5 +22,5 @@ migrate = Migrate()
 csrf = CSRFProtect()
 login_manager = LoginManager()
 mail = Mail()
-
+assets_env = Environment()
 checkout = Checkout()
