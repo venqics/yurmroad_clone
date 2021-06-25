@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-
+from wtforms.validators import Length, Email, required, EqualTo, URL, Optional
 from wtforms import StringField, PasswordField, validators
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from wtforms.fields.html5 import DecimalField
 from yumroad.models import User
 
 class EmptyForm(FlaskForm):
@@ -11,6 +11,8 @@ class EmptyForm(FlaskForm):
 class ProductForm(FlaskForm):
     name = StringField('Name', [validators.Length(min=4, max=60)])
     description = StringField('Description')
+    picture_url = StringField('Picture URL', description='Optional', validators=[validators.Optional(), validators.URL()])
+    price = DecimalField('Price', description='in USD, Optional')
 
 
 class LoginForm(FlaskForm):

@@ -6,6 +6,17 @@ class BaseConfig:
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv('YUMROAD_SECRET_KEY')
+    
+    MAIL_SERVER='smtp.gmail.com'
+    MAIL_PORT='587'
+    MAIL_USERNAME='venx.rao77@gmail.com'
+    MAIL_USE_TLS='True'
+    MAIL_PASSWORD='j.morrison$'
+    
+    STRIPE_SECRET_KEY = 'sk_test_51J4fpnSHO19FRh9CgjieC7ukn57c0tF3gPLTpMTJ7Xxpvepk6RvWCCxfY3MVaqWgs3WWLFavQhIZ1OzRMQyAKWFS00TYMevWWi'
+    STRIPE_PUBLISHABLE_KEY = 'pk_test_51J4fpnSHO19FRh9CJ8LQ6VmINhBGlTQx4SAlocYvToJDZQa912oNJCqNNkFyJtj1jqTUWRs0IraeX8rWIUfa5h8h00dPWId8xt'
+    STRIPE_WEBHOOK_KEY= 'whsec_dDaN58M6BzFkNobyQFmtx2Q8xMjNpmuf'
+
 
 class DevConfig(BaseConfig):
     SECRET_KEY = os.getenv('YUMROAD_SECRET_KEY', '00000abcdef')

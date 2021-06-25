@@ -32,6 +32,10 @@ class Product(db.Model):
     store = db.relationship("Store", uselist=False, back_populates="products")
     creator = db.relationship("User", uselist=False, back_populates="products")
 
+    @property
+    def primary_image_url(self):
+        return self.picture_url or "https://placehold.co/600x400?text={}".format(self.name)
+
     @validates('name')
     def validate_name(self, key, name):
         if len(name.strip()) <= 3:
