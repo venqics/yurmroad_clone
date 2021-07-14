@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from yumroad.payments import Checkout
 from flask_assets import Environment
+from flask_rq2 import RQ
 
 from sqlalchemy import MetaData
 
@@ -24,3 +25,9 @@ login_manager = LoginManager()
 mail = Mail()
 assets_env = Environment()
 checkout = Checkout()
+rq2 = RQ()
+
+@rq2.job
+def average(x, y):
+    print("I am running")
+    return (x + y)/2

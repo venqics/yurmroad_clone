@@ -19,6 +19,10 @@ class BaseConfig:
     STRIPE_WEBHOOK_KEY= 'whsec_dDaN58M6BzFkNobyQFmtx2Q8xMjNpmuf'
     SENTRY_DSN = "https://5e0c58f614924b7b8a0e33a221ba844f@o501456.ingest.sentry.io/5828526"
 
+    REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+    RQ_REDIS_URL = REDIS_URL
+    RQ_DASHBOARD_REDIS_URL = RQ_REDIS_URL
+
 class DevConfig(BaseConfig):
     SECRET_KEY = os.getenv('YUMROAD_SECRET_KEY', '00000abcdef')
     SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(os.path.join(folder_path, 'dev.db'))
@@ -30,6 +34,8 @@ class TestConfig(BaseConfig):
     SECRET_KEY = os.getenv('YUMROAD_SECRET_KEY', '12345abcdef')
     WTF_CSRF_ENABLED = False
     ASSETS_DEBUG = True
+    RQ_ASYNC = False
+    RQ_CONNECTION_CLASS = 'fakeredis.FakeStrictRedis'
 
 class ProdConfig(BaseConfig):
     DEBUG = False
@@ -39,6 +45,9 @@ class ProdConfig(BaseConfig):
     # these two off
     SESSION_COOKIE_SECURE = True
     REMEMBER_COOKIE_SECURE = True
+    ASSETS_DEBUG = False
+    RQ_REDIS_URL = REDIS_URL = os.getenv('REDIS_URL')
+    RQ_ASYNC = (REDIS_URL is not None)
 
 configurations = {
     'dev': DevConfig,
