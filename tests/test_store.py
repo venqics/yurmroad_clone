@@ -58,3 +58,10 @@ def test_store_page(client, init_database):
     for product in store.products:
         expected_link = url_for('product.details', product_id=product.id)
         assert expected_link in str(response.data)
+
+
+def test_store_page_not_exist(client, init_database):
+    response = client.get(url_for('store.show', store_id=1))
+    assert response.status_code == 404
+    assert b'Yumroad' in response.data
+    assert "might have disappeared" in str(response.data)
