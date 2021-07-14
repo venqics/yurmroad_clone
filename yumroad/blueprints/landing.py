@@ -1,8 +1,11 @@
+import logging
+
 from flask import Blueprint, render_template
 
 from yumroad.models import Store
 
 landing_bp = Blueprint('landing', __name__)
+logger = logging.getLogger(__name__)
 
 @landing_bp.route('/')
 def index():

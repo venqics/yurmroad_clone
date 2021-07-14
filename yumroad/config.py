@@ -17,7 +17,7 @@ class BaseConfig:
     STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', 'sk_test_51J4fpnSHO19FRh9CgjieC7ukn57c0tF3gPLTpMTJ7Xxpvepk6RvWCCxfY3MVaqWgs3WWLFavQhIZ1OzRMQyAKWFS00TYMevWWi')
     STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY','pk_test_51J4fpnSHO19FRh9CJ8LQ6VmINhBGlTQx4SAlocYvToJDZQa912oNJCqNNkFyJtj1jqTUWRs0IraeX8rWIUfa5h8h00dPWId8xt')
     STRIPE_WEBHOOK_KEY= 'whsec_dDaN58M6BzFkNobyQFmtx2Q8xMjNpmuf'
-
+    SENTRY_DSN = "https://5e0c58f614924b7b8a0e33a221ba844f@o501456.ingest.sentry.io/5828526"
 
 class DevConfig(BaseConfig):
     SECRET_KEY = os.getenv('YUMROAD_SECRET_KEY', '00000abcdef')
