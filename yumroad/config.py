@@ -28,6 +28,9 @@ class DevConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(os.path.join(folder_path, 'dev.db'))
     SQLALCHEMY_ECHO = True
     ASSETS_DEBUG = True
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
+    CACHE_TYPE = 'simple'
+
 class TestConfig(BaseConfig):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(os.path.join(folder_path, 'test.db'))
@@ -36,6 +39,9 @@ class TestConfig(BaseConfig):
     ASSETS_DEBUG = True
     RQ_ASYNC = False
     RQ_CONNECTION_CLASS = 'fakeredis.FakeStrictRedis'
+    DEBUG_TB_ENABLED = False
+    CACHE_TYPE = 'null'
+    CACHE_NO_NULL_WARNING = True
 
 class ProdConfig(BaseConfig):
     DEBUG = False
@@ -48,6 +54,8 @@ class ProdConfig(BaseConfig):
     ASSETS_DEBUG = False
     RQ_REDIS_URL = REDIS_URL = os.getenv('REDIS_URL')
     RQ_ASYNC = (REDIS_URL is not None)
+    CACHE_TYPE = 'redis'
+    CACHE_KEY_PREFIX = 'yumroad-'
 
 configurations = {
     'dev': DevConfig,
