@@ -1,0 +1,29 @@
+{
+
+    "name": "Yumroad",
+    "description": "Flask App",
+    "keywords": [
+      "flask",
+      "ecommerce"
+    ],
+    "website": "https://yumroad.fullstack",
+    "repository": "https://yumroad.fullstack",
+    "logo": "https://yumroad.fullstack",
+    "success_url": "/",
+    "scripts": {
+      "predeploy": "flask assets build",
+      "dokku": {
+        "predeploy": "flask assets build"
+      }
+    },
+    "env": {
+      "YUMROAD_SECRET_KEY": {
+        "description": "A secret key for verifying the integrity of signed cookies.",
+        "generator": "secret"
+      },
+      "FLASK_APP": {
+        "description": "Where the flask app lives.",
+        "value": "yumroad:create_app('prod')"
+      }
+    }
+  }
