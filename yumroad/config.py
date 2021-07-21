@@ -45,7 +45,6 @@ class TestConfig(BaseConfig):
 
 class ProdConfig(BaseConfig):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = b"postgres://xzplizxlmbbpnl:ae03f6941b7bf0f64d61cc494b1d64b8119b"
     SESSION_PROTECTION = "strong"
     # You should be using HTTPS in production anyway, but if you are not, turn
     # these two off
